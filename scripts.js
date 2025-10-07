@@ -1,3 +1,24 @@
+function generateUUID() {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    }
+
+    // Restore UID or create a new one if missing
+    function getOrCreateUID() {
+      let uid = localStorage.getItem('deviceUID');
+      if (!uid) {
+        uid = generateUUID();
+        localStorage.setItem('deviceUID', uid);
+      }
+      return uid;
+    }
+
+// Example usage
+const uid = getOrCreateUID();
+
 const Icons = {
   face: ({fill="#4CAF50", eye="#fff", mouth="#fff", mood="neutral"}) => {
 	// Mood options: "frown","slight-frown","neutral","slight-smile","smile"
@@ -12,9 +33,9 @@ const Icons = {
 	return `
 	  <svg class="svg" viewBox="0 0 36 36" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
 		<circle cx="18" cy="18" r="16" fill="${fill}"/>
-		<circle cx="13" cy="14" r="2" fill="${eye}" opacity="0.95"/>
-		<circle cx="23" cy="14" r="2" fill="${eye}" opacity="0.95"/>
-		<path d="${d}" stroke="${mouth}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+		<circle cx="13" cy="14" r="1.5" fill="${eye}" opacity="0.95"/>
+		<circle cx="23" cy="14" r="1.5" fill="${eye}" opacity="0.95"/>
+		<path d="${d}" stroke="${mouth}" stroke-width="1.5" fill="none" stroke-linecap="round"/>
 	  </svg>
 	`;
   },
@@ -77,11 +98,11 @@ const CONFIG = {
 	  iconFactory: "face",
 	  // Per-option params (color + mood)
 	  options: [
-		{ value: "too cold",       label: "Too cold",       iconParams: { fill:colors["dark blue"], mood:"frown" } },
-		{ value: "slightly cold",  label: "Slightly cold",  iconParams: { fill:colors["light blue"], mood:"neutral" } },
-		{ value: "fine",           label: "Fine",           iconParams: { fill:colors["green"], mood:"smile" } },
-		{ value: "a bit hot",      label: "A bit hot",      iconParams: { fill:colors["orange"], mood:"neutral" } },
-		{ value: "very hot",       label: "Very hot",       iconParams: { fill:colors["red"], mood:"frown" } }
+		{ value: "-2",       label: "Too cold",       iconParams: { fill:colors["dark blue"], mood:"frown" } },
+		{ value: "-1",  label: "Slightly cold",  iconParams: { fill:colors["light blue"], mood:"neutral" } },
+		{ value: "0",           label: "Fine",           iconParams: { fill:colors["green"], mood:"smile" } },
+		{ value: "1",      label: "A bit hot",      iconParams: { fill:colors["orange"], mood:"neutral" } },
+		{ value: "2",       label: "Very hot",       iconParams: { fill:colors["red"], mood:"frown" } }
 	  ],
 	  required: true
 	},
@@ -92,8 +113,8 @@ const CONFIG = {
 	  // Show how you can mix a different icon type for this question
 	  // Choose "breeze" (green) for fresh & clean, "swirl" (orange) for stuffy
 	  options: [
-		{ value: "odors, stuffy", label: "Odors, stuffy", iconParams: { fill:colors["orange"], mood:"frown" } },
-		{ value: "fresh & clean", label: "Fresh & clean", iconParams: { fill:colors["green"], mood:"smile" } }
+		{ value: "-1", label: "Odors, stuffy", iconParams: { fill:colors["orange"], mood:"frown" } },
+		{ value: "1", label: "Fresh & clean", iconParams: { fill:colors["green"], mood:"smile" } }
 	  ],
 	  required: true
 	}
@@ -171,6 +192,7 @@ function renderQuestion(q){
   return fs;
 }
 
+
 // render all configured questions
 CONFIG.questions.forEach(q => questionsRoot.appendChild(renderQuestion(q)));
 
@@ -182,14 +204,34 @@ form.addEventListener("submit", (e) => {
 
   const data = new FormData(form);
   const answers = {};
+
+  var complete = true
+
+  answers["time_ms"]=Date.now()
+  answers["time_str"]=new Date()
+  answers["ui"]=uid
+
   CONFIG.questions.forEach(q => {
+	  
+	if (data.get(q.id)==null){
+		warning.style.display = "block";
+		// hide message after 3s
+		setTimeout(() => { warning.style.display = "none"; }, 3000);
+		complete=false
+	}
+	  
 	answers[q.id] = data.get(q.id);
   });
+
+  if (!complete){
+	return
+  }
 
   console.log("Survey submitted:", answers);
 
   // confirmation
   message.style.display = "block";
+
 
   // reset for next entry
   form.reset();

@@ -10,10 +10,11 @@ var translations = {"fr":
 						"Fine":"Ok, neutre",
 						"A bit hot":"Un peu chaud",
 						"Very hot":"Trop chaud",
-						"Odors, stuffy":"Pas bien",
+						"Odors, stuffy":"Mauvaise",
 						"Fresh & clean":"Bonne",
 						"submit":"Envoyer",
-						"thank-you":"Merci pour votre feedback!"
+						"thank-you":"Merci pour votre feedback!",
+						"warning":"Merci de répondre aux deux questions pour soumettre"
 						},
 					"nl":
 						{"title":"Comfort analyse",
@@ -29,7 +30,9 @@ var translations = {"fr":
 						"Odors, stuffy":"Slecht",
 						"Fresh & clean":"Goed",
 						"submit":"Opnemen",
-						"thank-you":"Bedankt voor u feedback!"
+						"thank-you":"Bedankt voor u feedback!",
+						"warning":"Bedankt om de twee vragen te antwoorden om uw antwoord op te nemen"
+
 
 },
 }
