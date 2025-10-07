@@ -1,0 +1,161 @@
+  :root{
+  --bg1:#e0f7fa; --bg2:#fce4ec; --card:#fff; --text:#2e2e2e; --muted:#666;
+  --primary:#0d47a1; --primary-acc:#1976d2; --ok:#2e7d32;
+  --icon-size: 48px;    /* tweak global icon size here (updated at runtime) */
+  --touch-min: 44px;    /* minimum touch target height */
+}
+
+/* Ensure full-height viewport and consistent sizing */
+*{ box-sizing:border-box; }
+html, body { height: 100%; margin: 0; }
+
+/* Kiosk-like centered layout for horizontal tablet */
+body{
+  display:flex; align-items:center; justify-content:center; /* center the card */
+  padding:0; color:var(--text);
+  background: linear-gradient(135deg, var(--bg1), var(--bg2));
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* Centered card container */
+.container{
+  width: min(1000px, 94vw);
+  max-height: 92vh;                    /* avoid overflow on short screens */
+  background: var(--card);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.12);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;             /* vertically center inner content */
+  align-items: center;                 /* horizontally center inner content */
+  text-align: center;                  /* center headings + text */
+  overflow: auto;                      /* scroll if needed on very small heights */
+  -webkit-overflow-scrolling: touch;
+}
+
+h1{
+  margin: 0 0 6px;
+  font-size: clamp(20px, 3vw, 28px);
+}
+
+.sub{
+  color: var(--muted);
+  margin: 0 0 20px;
+  font-size: clamp(14px, 2vw, 16px);
+}
+
+/* Questions */
+fieldset{ border:0; padding:0; margin:0 0 22px; width:100%; }
+legend{ font-weight:700; margin-bottom:12px; font-size: clamp(16px, 2vw, 18px); }
+
+/* Options row: horizontally centered, wraps when needed */
+.options{
+  display:flex; justify-content:center; align-items:flex-start;
+  gap:18px; flex-wrap:wrap; margin-top: 8px;
+}
+
+/* Hide native radios but keep them accessible */
+.options input[type="radio"]{
+  position:absolute; opacity:0; width:0; height:0; pointer-events:none;
+}
+
+/* Clickable option card with icon on top and label below */
+.option{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:10px; text-align:center;
+  padding:14px; border:2px solid transparent; border-radius:12px;
+  background:#f7f7f9; cursor:pointer; user-select:none;
+  min-width: 120px;
+  min-height: calc(var(--touch-min) + var(--icon-size) + 18px);
+  transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+  touch-action: manipulation;
+}
+.option:hover{ box-shadow:0 4px 12px rgba(0,0,0,.08); transform: translateY(-1px); }
+.option span{ font-weight:600; font-size:14px; line-height:1.2; }
+
+/* Selected state */
+.options input[type="radio"]:checked + label.option{
+  border-color: var(--primary-acc);
+  background: #eef6ff;
+  box-shadow: 0 6px 16px rgba(25,118,210,.18);
+}
+
+/* Keyboard focus ring */
+.options input[type="radio"]:focus-visible + label.option{
+  outline: 3px solid #90caf9;
+  outline-offset: 2px;
+}
+
+/* Icon sizing */
+.svg{
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex: 0 0 auto;
+  display: inline-block;
+}
+
+/* Submit row centered */
+.actions{
+  margin-top: 18px;
+  display:flex; justify-content:center; align-items:center;
+  gap:14px; flex-wrap:wrap;
+}
+
+/*button{
+  appearance:none; border:0; border-radius:10px;
+  background: var(--primary-acc); color:#fff;
+  padding: 14px 22px; font-size:16px; font-weight:700; cursor:pointer;
+  transition: transform .06s ease, filter .2s ease, background .2s ease;
+  min-width: 180px; min-height: var(--touch-min);
+  touch-action: manipulation;
+}*/
+button:hover{ filter: brightness(0.95); transform: translateY(-1px); }
+
+#message{ display:none; font-weight:700; color: var(--ok); }
+
+/* Compact tweaks for short landscape tablets */
+@media (max-height: 600px){
+  .container{ padding: 20px; }
+  .option{ min-width:110px; padding:12px; }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce){
+  .option, button{ transition: none; }
+}
+
+.button-primary {
+	background-color: #0087b7	;
+	color:#fff;
+	border-radius:20px;
+	padding-right:20px;
+	padding-left: 20px;
+	font-size:16px;
+	font-weight: 600;
+	height:40px;
+}
+.button-secondary {
+	color: #0087b7;
+	background-color:#fff;
+	border-radius:20px;
+	padding-right:20px;
+	padding-left: 20px;
+	font-size:16px;
+	font-weight: 600;
+	height:40px;
+	border: 1px solid #0087b7
+}
+
+
+.logo{
+	width:200px;
+	
+}
+.header {
+  width:100%;
+  display: flex;               /* activate flexbox */
+  justify-content: space-between; /* push items left/right */
+  align-items: center;         /* vertical alignment */
+  padding: 0 1rem;             /* optional spacing */
+}
