@@ -107,7 +107,7 @@ const CONFIG = {
 	  required: true
 	},
 	{
-	  id: "air",
+	  id: "iaq",
 	  legend: "iaq_question",
 	  roleLabel: "Air perception",
 	  // Show how you can mix a different icon type for this question
@@ -209,7 +209,7 @@ form.addEventListener("submit", (e) => {
 
   answers["time_ms"]=Date.now()
   answers["time_str"]=new Date()
-  answers["ui"]=uid
+  answers["userid"]=uid
 
   CONFIG.questions.forEach(q => {
 	  
@@ -239,6 +239,7 @@ form.addEventListener("submit", (e) => {
   // hide message after 3s
   setTimeout(() => { message.style.display = "none"; }, 3000);
 
+  logEvent(answers)
   // Placeholder for your future fetch():
   // fetch("/your-endpoint", {
   //   method: "POST",
@@ -290,5 +291,23 @@ function translateAll(){
 function translate(key){
 	return translations[currentLang][key]
 }
+
+function logEvent(answers) {
+  const url = new URL('https://script.google.com/macros/s/AKfycbxJRG7wPPdYTreq8_cZ4bJTMHOIplycqMLSLcMn2n6_S9rodpkIBYmfwfZuhRu9NOZk4Q/exec');
+
+  url.searchParams.append("time_str", answers["time_str"]);
+  url.searchParams.append("time_ms", answers["time_ms"]);
+  url.searchParams.append("temperature", answers["temperature"]);
+  url.searchParams.append("iaq", answers["iaq"]);
+  url.searchParams.append("userid",answers["userid"]);
+
+  fetch(url)
+    .then(() => console.log("Tracked"))
+    .catch(err => console.error("Tracking failed:", err));
+
+}
+
+
+
 
 translateAll()
