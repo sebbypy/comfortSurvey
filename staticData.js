@@ -2,7 +2,7 @@ var currentLang = "fr"
 var translations = {"fr":
 						{"title":"Enquête de satisfaction",
 						"question":"Dites nous comment vous percevez votre confort maintenant",
-						"intro":"Pour mieux comprendre et améliorer le confort dans nos locaux, nous récoltons le feedback des occupants et les lions aux mesures de températures et CO2 de notre GT",
+						"intro":"Pour mieux comprendre et améliorer le confort dans nos locaux, nous récoltons le feedback des occupants et les lions aux mesures de températures et CO2 de notre GTC",
 						"temperature_question":"Comment ressentez-vous la température dans ce local?",
 						"iaq_question":"Comment percevez-vous la qualité de l'air dans ce local?",
 						"Too cold":"Trop froid",
