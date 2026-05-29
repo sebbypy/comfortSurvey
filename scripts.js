@@ -1,22 +1,24 @@
-function generateUUID() {
-      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0;
-        const v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-      });
-    }
+function getOrCreateUID() {
+  const params = new URLSearchParams(window.location.search);
 
-    // Restore UID or create a new one if missing
-    function getOrCreateUID() {
-      let uid = localStorage.getItem('deviceUID');
-      if (!uid) {
-        uid = generateUUID();
-        localStorage.setItem('deviceUID', uid);
-      }
-      return uid;
-    }
+  // Preferred for kiosk devices:
+  // example: https://your-site.github.io/?device=kiosk-1
+  const deviceFromUrl = params.get("device");
 
-// Example usage
+  if (deviceFromUrl) {
+    return deviceFromUrl;
+  }
+
+  // Fallback for normal browser testing
+  let uid = localStorage.getItem("deviceUID");
+  if (!uid) {
+    uid = generateUUID();
+    localStorage.setItem("deviceUID", uid);
+  }
+
+  return uid;
+}
+
 const uid = getOrCreateUID();
 
 const Icons = {
