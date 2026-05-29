@@ -162,3 +162,8 @@ button:hover{ filter: brightness(0.95); transform: translateY(-1px); }
   align-items: center;         /* vertical alignment */
   padding: 0 1rem;             /* optional spacing */
 }
+
+
+#disclaimer{
+	font-size:14px;
+}

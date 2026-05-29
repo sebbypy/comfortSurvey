@@ -14,7 +14,8 @@ var translations = {"fr":
 						"Fresh & clean":"Bonne",
 						"submit":"Envoyer",
 						"thank-you":"Merci pour votre feedback!",
-						"warning":"Merci de répondre aux deux questions pour soumettre"
+						"warning":"Merci de répondre aux deux questions pour soumettre",
+						"disclaimer":"Cette enquête est réalisée dans le cadre du projet de recherche Data4Construction. Les réponses sont traitées par la unit Building Technologies, et pas directement par Facilities & Buildings. Questions ou feedback sur l'interface ? sebastien.pecceu@buildwise.be et juliette.vinel@buildwise.be"
 						},
 					"nl":
 						{"title":"Comfort analyse",
@@ -31,8 +32,8 @@ var translations = {"fr":
 						"Fresh & clean":"Goed",
 						"submit":"Opnemen",
 						"thank-you":"Bedankt voor u feedback!",
-						"warning":"Bedankt om de twee vragen te antwoorden om uw antwoord op te nemen"
-
+						"warning":"Bedankt om de twee vragen te antwoorden om uw antwoord op te nemen",
+						"disclaimer":"Deze enquête wordt uitgevoerd in het kader van het onderzoeksproject Data4Construction. De antwoorden worden verwerkt door de unit Building Technologies en niet rechtstreeks door Facilities & Buildings. Vragen of feedback over de interface? sebastien.pecceu@buildwise.be en juliette.vinel@buildwise.be"
 
 },
 }
