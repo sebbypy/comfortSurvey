@@ -1,7 +1,6 @@
 var currentLang = "fr"
 var translations = {"fr":
 						{"title":"Enquête de confort",
-						"question":"Dites nous comment vous percevez votre confort maintenant",
 						"intro":"Pour mieux comprendre et améliorer le confort dans nos locaux, nous récoltons le feedback des occupants et les lions aux mesures de températures et CO2 de notre GTC",
 						"temperature_question":"A cet instant, comment ressentez-vous la température dans ce local?",
 						"iaq_question":"A cet instant, comment percevez-vous la qualité de l'air dans ce local?",
@@ -19,10 +18,9 @@ var translations = {"fr":
 						},
 					"nl":
 						{"title":"Comfort analyse",
-						"question":"Zeg ons hoe het comfort is nu",
-						"intro":"Om het comfort beter te begrijpen en verbeteren, nemen we op het feedback van de gebruikers. Daarna, kunnen we het verbinden aan one GBS",
-						"temperature_question":"Hoe is het temperatuur nu in dit lokaal?",
-						"iaq_question":"Hoe vindt u het binnenluchtkwaliteit nu in dit lokaal?",
+						"intro":"Om het comfort beter te begrijpen en verbeteren, nemen we op het feedback van de gebruikers. Daarna, kunnen we die koppelen aan one GBS",
+						"temperature_question":"Hoe is de temperatuur momenteel in dit lokaal?",
+						"iaq_question":"Hoe vindt u de binnenluchtkwaliteit momenteel in dit lokaal?",
 						"Too cold":"Koud",
 						"Slightly cold":"Een beetje koud",
 						"Fine":"Neutraal",
